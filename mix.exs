@@ -50,7 +50,8 @@ defmodule RaffleManager.MixProject do
       {:comeonin, "~> 5.4.0"},
       {:bcrypt_elixir, "~> 3.0"},
       {:poison, "~> 5.0"},
-      {:faker, "~> 0.17"}
+      {:faker, "~> 0.17"},
+      {:sage, "~> 0.6.3"}
     ]
   end
 

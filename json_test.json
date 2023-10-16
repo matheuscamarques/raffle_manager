@@ -1,0 +1,43 @@
+{
+    "name": "Sorteio Lava Jato",
+    "description" : "Sorteio de um Lava Jato",
+    "image": "source.to/foto.png",
+    "date_limit": "2023-10-16 20:04:44.158940Z",
+    "unit_value": 1.4,
+    "range_numbers": 4,
+    "sort_numbers": [
+        {
+            "user_id": "usuario_A",
+            "number" : 1 
+        },
+        {
+            "user_id": "usuario_B",
+            "number" : 2 
+        },
+        {
+            "user_id": "usuario_C",
+            "number" : 3 
+        },
+        {
+            "user_id": null,
+            "number" : 4
+        }
+    ],
+    "impulses": [
+        {
+            "user_id": "usuario_A",
+            "impulses" : 3
+        },
+        {
+            "user_id": "usuario_B",
+            "impulses" : 3        },
+        {
+            "user_id": "usuario_C",
+            "impulses" : 3 
+        }
+    ],
+    "total_impulses": 9,
+    "resultado": {
+        "user_id": "usuario_C"
+    }
+}

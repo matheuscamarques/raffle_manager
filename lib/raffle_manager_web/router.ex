@@ -24,6 +24,11 @@ defmodule RaffleManagerWeb.Router do
         get "/refresh", Controllers.Authentication.TokenController, :refresh
       end
     end
+
+    scope "/sort" do
+      pipe_through :auth
+      resources "/", SortController, except: [:new, :edit]
+    end
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
