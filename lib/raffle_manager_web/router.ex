@@ -14,12 +14,13 @@ defmodule RaffleManagerWeb.Router do
 
     post "/users", Controllers.Accounts.UserController, :create
 
-    scope "/auth" do
-      post "/signin", Controllers.Authentication.TokenController, :signin
+    scope "/token" do
+      post "/sign-in", Controllers.Authentication.TokenController, :signin
 
       scope("/") do
         pipe_through :auth
-        get "/signout", Controllers.Authentication.TokenController, :signout
+
+        get "/sign-out", Controllers.Authentication.TokenController, :signout
         get "/refresh", Controllers.Authentication.TokenController, :refresh
       end
     end
