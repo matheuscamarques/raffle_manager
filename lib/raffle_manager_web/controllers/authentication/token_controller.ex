@@ -6,12 +6,18 @@ defmodule RaffleManagerWeb.Controllers.Authentication.TokenController do
     with {:ok, _user, token} <- Guardian.authenticate(email, password) do
       conn
       |> put_status(:created)
-      |> json(%{ token: token})
+      |> json(%{token: token})
     end
   end
 
-  def signout(conn,_) do
-    token = conn |> get_req_header("Authorization") |> List.first()
+  def signout(conn, _) do
+    token =
+      conn
+      |> get_req_header("authorization")
+      |> List.first()
+
+    # Remove "Bearer " prefix if it exists
+    token = String.replace_prefix(token, "Bearer ", "")
     Guardian.revoke(token)
 
     conn
@@ -19,13 +25,18 @@ defmodule RaffleManagerWeb.Controllers.Authentication.TokenController do
     |> json(%{message: "User signed out successfully"})
   end
 
-  def refresh(conn,_) do
-    token = conn |> get_req_header("Authorization") |> List.first()
+  def refresh(conn, _) do
+    token =
+      conn
+      |> get_req_header("authorization")
+      |> List.first()
+
+    # Remove "Bearer " prefix if it exists
+    token = String.replace_prefix(token, "Bearer ", "")
     {:ok, new_token, _claims} = Guardian.refresh(token)
 
     conn
     |> put_status(:ok)
     |> json(%{token: new_token})
   end
-
 end
