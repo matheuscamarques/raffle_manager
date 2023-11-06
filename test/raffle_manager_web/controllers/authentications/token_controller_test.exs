@@ -35,6 +35,6 @@ defmodule RaffleManagerWeb.Authentications.TokenControllerTest do
     conn = get(conn, "/api/token/refresh")
 
     # Assuming the response should be a success with a new token
-    assert json_response(conn, 200)["token"] != nil
+    assert json_response(conn, 200)["token"] != token
   end
 end

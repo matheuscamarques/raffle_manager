@@ -33,7 +33,7 @@ defmodule RaffleManagerWeb.Controllers.Authentication.TokenController do
 
     # Remove "Bearer " prefix if it exists
     token = String.replace_prefix(token, "Bearer ", "")
-    {:ok, new_token, _claims} = Guardian.refresh(token)
+    {:ok, {_old, _}, {new_token,_}} = Guardian.refresh(token)
 
     conn
     |> put_status(:ok)

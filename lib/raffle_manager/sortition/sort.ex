@@ -16,6 +16,6 @@ defmodule RaffleManager.Sortition.Sort do
   def changeset(sort, attrs) do
     sort
     |> cast(attrs, [:name, :description, :image, :date_limit, :range_numbers])
-    |> validate_required([:name, :description, :image, :date_limit, :range_numbers, :created_by])
+    |> validate_required([:name, :description, :image, :date_limit, :range_numbers])
   end
 end

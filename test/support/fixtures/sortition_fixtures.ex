@@ -3,7 +3,6 @@ defmodule RaffleManager.SortitionFixtures do
   This module defines test helpers for creating
   entities via the `RaffleManager.Sortition` context.
   """
-
   @doc """
   Generate a sort.
   """
@@ -11,7 +10,7 @@ defmodule RaffleManager.SortitionFixtures do
     {:ok, sort} =
       attrs
       |> Enum.into(%{
-        date_limit: ~D[2023-10-15],
+        date_limit: DateTime.utc_now() |> DateTime.truncate(:second),
         description: "some description",
         image: "some image",
         name: "some name",

@@ -4,16 +4,17 @@ defmodule RaffleManagerWeb.SortControllerTest do
   import RaffleManager.SortitionFixtures
 
   alias RaffleManager.Sortition.Sort
+  alias RaffleManagerWeb.Auth.Guardian
 
   @create_attrs %{
-    date_limit: ~D[2023-10-15],
+    date_limit: DateTime.utc_now() |> DateTime.truncate(:second) |> to_string,
     description: "some description",
     image: "some image",
     name: "some name",
     range_numbers: 42
   }
   @update_attrs %{
-    date_limit: ~D[2023-10-16],
+    date_limit: DateTime.utc_now() |> DateTime.truncate(:second) |> to_string,
     description: "some updated description",
     image: "some updated image",
     name: "some updated name",
@@ -22,7 +23,15 @@ defmodule RaffleManagerWeb.SortControllerTest do
   @invalid_attrs %{date_limit: nil, description: nil, image: nil, name: nil, range_numbers: nil}
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    user = RaffleManager.AccountsFixtures.user_fixture()
+    {:ok, _user, token} = Guardian.authenticate(user.email, "some_encrypted_password")
+
+    conn =
+      conn
+      |> put_req_header("authorization", "Bearer #{token}")
+      |> put_req_header("accept", "application/json")
+
+    {:ok, conn: conn}
   end
 
   describe "index" do
@@ -41,7 +50,7 @@ defmodule RaffleManagerWeb.SortControllerTest do
 
       assert %{
                "id" => ^id,
-               "date_limit" => "2023-10-15",
+               "date_limit" => _,
                "description" => "some description",
                "image" => "some image",
                "name" => "some name",
@@ -66,7 +75,7 @@ defmodule RaffleManagerWeb.SortControllerTest do
 
       assert %{
                "id" => ^id,
-               "date_limit" => "2023-10-16",
+               "date_limit" => _,
                "description" => "some updated description",
                "image" => "some updated image",
                "name" => "some updated name",

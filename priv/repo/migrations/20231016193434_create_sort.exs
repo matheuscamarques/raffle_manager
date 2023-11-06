@@ -14,4 +14,5 @@ defmodule RaffleManager.Repo.Migrations.CreateSort do
     end
   end
 end
-#sort = %{name: "Sorteio", description: "Sorteio", image: "abc.png", date_limit: "2023-10-16 21:24:53.010111Z", range_numbers: 5}
+
+# sort = %{name: "Sorteio", description: "Sorteio", image: "abc.png", date_limit: "2023-10-16 21:24:53.010111Z", range_numbers: 5}

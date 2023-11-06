@@ -29,6 +29,11 @@ defmodule RaffleManagerWeb.Router do
       pipe_through :auth
       resources "/", SortController, except: [:new, :edit]
     end
+
+    # scope "/sort_number" do
+    #   pipe_through :auth
+    #   resources "/", SortNumberController
+    # end
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
